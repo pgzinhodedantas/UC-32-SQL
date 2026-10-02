@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Leitores - Biblioteca</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Leitores</h1>
+
+    <form action="/leitores/adicionar" method="POST">
+
+        <input
+            type="text"
+            name="nome"
+            placeholder="Nome do leitor"
+            required
+        >
+
+        <input
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            required
+        >
+
+        <button type="submit">Adicionar Leitor</button>
+
+    </form>
+
+    <h2>Leitores cadastrados</h2>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for leitor in leitores %}
+
+            <tr>
+                <td>{{ leitor['id_leitor'] }}</td>
+                <td>{{ leitor['nome'] }}</td>
+                <td>{{ leitor['email'] }}</td>
+
+                <td>
+                    <a href="/leitores/excluir/{{ leitor['id_leitor'] }}">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+
+            {% else %}
+
+            <tr>
+                <td colspan="4">
+                    Nenhum leitor cadastrado.
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <br>
+
+    <a href="/">Voltar ao início</a>
+
+</div>
+
+</body>
+</html>

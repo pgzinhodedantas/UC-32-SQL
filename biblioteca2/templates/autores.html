@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Autores - Biblioteca</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Autores | Biblioteca</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <div class="logo">
+            📚 Biblioteca
+        </div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/autores" class="ativo">Autores</a>
+            <a href="/livros">Livros</a>
+            <a href="/leitores">Leitores</a>
+        </nav>
+    </header>
+
+
+    <main class="conteudo">
+
+        <div class="titulo-pagina">
+            <div>
+                <span class="subtitulo">GERENCIAMENTO</span>
+                <h1>Autores</h1>
+                <p>Cadastre e visualize os autores da biblioteca.</p>
+            </div>
+        </div>
+
+
+        <section class="card">
+
+            <div class="card-titulo">
+                <h2>Adicionar autor</h2>
+                <p>Preencha o campo abaixo para cadastrar um novo autor.</p>
+            </div>
+
+            <form action="/autores/adicionar" method="POST" class="formulario">
+
+                <div class="campo">
+                    <label for="nome">Nome do autor</label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite o nome do autor"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="botao">
+                    + Adicionar autor
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <section class="card">
+
+            <div class="card-titulo">
+                <h2>Autores cadastrados</h2>
+                <p>Lista de autores registrados no sistema.</p>
+            </div>
+
+            <div class="tabela-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for autor in autores %}
+
+                        <tr>
+
+                            <td>
+                                <span class="id">
+                                    {{ autor['id_autor'] }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <strong>
+                                    {{ autor['nome'] }}
+                                </strong>
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="/autores/excluir/{{ autor['id_autor'] }}"
+                                    class="botao-excluir"
+                                    onclick="return confirm('Deseja realmente excluir este autor?')"
+                                >
+                                    Excluir
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="3" class="vazio">
+                                Nenhum autor cadastrado.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <a href="/" class="voltar">
+            ← Voltar para o início
+        </a>
+
+    </main>
+
+
+    <footer>
+        <p>© 2026 Sistema de Biblioteca</p>
+    </footer>
+
+</body>
+
+</html>
+</body>
+</html>
